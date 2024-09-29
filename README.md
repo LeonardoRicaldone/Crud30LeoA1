@@ -1,0 +1,21 @@
+CREATE TABLE tbCocinero(
+ID_Cocinero INT PRIMARY KEY,
+Nombre_Cocinero VARCHAR2(100),
+Edad_Cocinero INT,
+Peso_Cocinero NUMBER,
+Correo_Cocinero VARCHAR2(100)
+);
+
+--SECUENCIA DE LA TABLA COCINEROS--
+CREATE SEQUENCE identity_Cocinero
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+--TRIGGER DE LA TABLA COCINEROS--
+CREATE OR REPLACE TRIGGER trg_before_insert_tbCocinero
+BEFORE INSERT ON tbCocinero
+FOR EACH ROW
+BEGIN
+    SELECT identity_Cocinero.NEXTVAL INTO :new.ID_Cocinero FROM dual;
+END;
